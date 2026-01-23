@@ -1,10 +1,11 @@
 # --- Google Sheets Settings ---
-SPREADSHEET_NAME = "sample_spreadsheets"  # ここにスプレッドシート名を入力してください
+SPREADSHEET_NAME = "inhouse-ml-compe-MDXQ-alumni-2026-Jan"  # ここにスプレッドシート名を入力してください
 LEADERBOARD_WORKSHEET_NAME = "leaderboard"  # リーダーボード用のワークシート名
 GROUND_TRUTH_WORKSHEET_NAME = "ground_truth"  # 正解データ用のワークシート名
 
 # --- Playground Page Settings ---
-PLAYGROUND_PAGE_URL = "https://steelpipe75.github.io/inhouse-ml-competition-playground-sample/" # PlaygroundページのURL
+PLAYGROUND_PAGE_URL_JUPYTERLITE = "https://steelpipe75.github.io/ml-compe-MDXQ-alumni-sample-jupyterlite-Jan/lab/index.html"
+PLAYGROUND_PAGE_URL_MARIMO = "https://steelpipe75.github.io/ml-compe-MDXQ-alumni-sample-marimo-Jan/notebooks/sample.html"
 
 # --- Competition Settings ---
 IS_COMPETITION_RUNNING = (

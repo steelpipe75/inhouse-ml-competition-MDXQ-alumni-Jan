@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import os
 import streamlit as st
+from sklearn.metrics import roc_auc_score
 
 from utils import (
     read_ground_truth_core,
@@ -50,22 +51,27 @@ GROUND_TRUTH_HEADER: List[str] = ["id", "target", "Usage"]
 
 
 # --- スコアリング関数 ---
+def _safe_roc_auc_score(y_true: pd.Series, y_score: pd.Series) -> float:
+    """roc_auc_scoreを安全に計算するヘルパー関数。単一クラスの場合には0.5を返す。"""
+    if y_true.nunique() < 2:
+        # y_trueに単一のクラスしかない場合、roc_auc_scoreは計算できないため、0.5を返す
+        return 0.5
+    return roc_auc_score(y_true, y_score)
+
+
 def score_submission(pred_df: pd.DataFrame, gt_df: pd.DataFrame) -> Tuple[float, float]:
-    """public/privateスコアを返す (例:MAE)"""
-    merged = pred_df.merge(gt_df, on="id", suffixes=("_pred", ""))
+    """public/privateスコアを返す (例:AUC)"""
+    merged = pred_df.merge(gt_df, on="id")
 
     public_mask = merged["Usage"] == "Public"
     private_mask = merged["Usage"] == "Private"
 
-    public_score = np.mean(
-        np.abs(
-            merged.loc[public_mask, "target_pred"] - merged.loc[public_mask, "target"]
-        )
+    # AUCの計算
+    public_score = _safe_roc_auc_score(
+        merged.loc[public_mask, "target"], merged.loc[public_mask, "cls1_probability"]
     )
-    private_score = np.mean(
-        np.abs(
-            merged.loc[private_mask, "target_pred"] - merged.loc[private_mask, "target"]
-        )
+    private_score = _safe_roc_auc_score(
+        merged.loc[private_mask, "target"], merged.loc[private_mask, "cls1_probability"]
     )
 
     return float(public_score), float(private_score)

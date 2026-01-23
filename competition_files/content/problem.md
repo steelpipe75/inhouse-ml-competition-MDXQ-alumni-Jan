@@ -1,19 +1,14 @@
 # タスク概要
 
-このページはカスタマイズ可能です。
+## 分類タスクの説明
 
-- この内容は `competition_files/content/problem.md` を編集することで変更できます。
-
----
-
-
-## 予測タスクの説明
-
-本コンペティションでは、与えられた特徴量 `a`, `b`, `c` から目的変数 `target` を予測します。
+本コンペティションでは、与えられた特徴量 `feature_0`, `feature_1` から目的変数 `target` を予測するクラス分類問題です。  
+`target` は`0`, `1`のいずれかのクラスに属します。
 
 - 入力：
-  - `id`, `a`, `b`, `c` からなるテストデータ（`test.csv`）
+  - `id`, `feature_0`, `feature_1`, `target` からなる訓練用データ（`train.csv`）
+  - `id`, `feature_0`, `feature_1` からなるテストデータ（`test.csv`）
 - 出力：
-  - 各 `id` に対する予測値 `target`（`sample_submission.csv` 形式）
+  - 各 `id` がクラス`1`である確率の予測値 `cls1_probability`（`sample_submission.csv` 形式）
 - 評価指標：
-  - MAE（Mean Absolute Error）
+  - AUC
