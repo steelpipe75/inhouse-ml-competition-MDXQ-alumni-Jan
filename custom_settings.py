@@ -26,7 +26,7 @@ SAMPLE_SUBMISSION_FILE = os.path.join(
 )  # サンプル提出ファイルのパス
 HOME_CONTENT_FILE = "competition_files/content/home.md"  # Homeページのカスタマイズ用コンテンツファイルのパス
 LEADERBOARD_SORT_ASCENDING: bool = (
-    True  # リーダーボードのスコアソート順（True:昇順, False:降順）
+    False  # リーダーボードのスコアソート順（True:昇順, False:降順）
 )
 
 # --- Googleスプレッドシート関連のヘッダー定義 ---
