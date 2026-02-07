@@ -2,36 +2,73 @@
 # requires-python = ">=3.13"
 # dependencies = [
 #     "marimo>=0.19.9",
+#     "matplotlib==3.10.8",
+#     "numpy==2.4.2",
+#     "polars==1.38.1",
+#     "scikit-learn==1.8.0",
 # ]
 # ///
+
 import marimo
 
-__generated_with = "0.19.4"
+__generated_with = "0.19.9"
 app = marimo.App()
 
 
 @app.cell
 def _():
     import marimo as mo
+
     return (mo,)
-
-
-@app.cell
-def _():
-    import micropip
-    return (micropip,)
-
-
-@app.cell
-async def _(micropip):
-    await micropip.install("polars")
-    return
 
 
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
     # 機械学習コンペ 分類問題 サンプルノートブック
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## WASM環境であればpolarsをインストール
+    """)
+    return
+
+
+@app.cell
+def _():
+    import sys
+
+    return (sys,)
+
+
+@app.cell
+def _(sys):
+    IS_WASM = sys.platform == "emscripten"
+    return (IS_WASM,)
+
+
+@app.cell
+def _(IS_WASM):
+    if IS_WASM:
+        import micropip
+    return (micropip,)
+
+
+@app.cell
+async def _(IS_WASM, micropip):
+    if IS_WASM:
+        await micropip.install("polars")
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## ライブラリをインポート
     """)
     return
 
@@ -44,6 +81,7 @@ def _():
     from sklearn.linear_model import LogisticRegression
     from sklearn.metrics import roc_curve, roc_auc_score
     from matplotlib import pyplot as plt
+
     return (
         LogisticRegression,
         pl,
