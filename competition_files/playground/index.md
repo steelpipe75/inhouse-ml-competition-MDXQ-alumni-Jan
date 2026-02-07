@@ -2,3 +2,4 @@
 
 - [JupyterLite](./JupyterLite/)
 - [marimo](./marimo/)
+- [Colab](COLAB_LINK_PLACEHOLDER)
