@@ -4,8 +4,9 @@ LEADERBOARD_WORKSHEET_NAME = "leaderboard"  # リーダーボード用のワー�
 GROUND_TRUTH_WORKSHEET_NAME = "ground_truth"  # 正解データ用のワークシート名
 
 # --- Playground Page Settings ---
-PLAYGROUND_PAGE_URL_JUPYTERLITE = "https://steelpipe75.github.io/ml-compe-MDXQ-alumni-sample-jupyterlite-Jan/lab/index.html"
-PLAYGROUND_PAGE_URL_MARIMO = "https://steelpipe75.github.io/ml-compe-MDXQ-alumni-sample-marimo-Jan/notebooks/sample.html"
+PLAYGROUND_PAGE_URL_JUPYTERLITE = "https://steelpipe75.github.io/inhouse-ml-competition-MDXQ-alumni-Jan/JupyterLite/"
+PLAYGROUND_PAGE_URL_MARIMO = "https://steelpipe75.github.io/inhouse-ml-competition-MDXQ-alumni-Jan/marimo/"
+PLAYGROUND_PAGE_URL_COLAB = "https://colab.research.google.com/github/steelpipe75/inhouse-ml-competition-MDXQ-alumni-Jan/blob/main/competition_files/playground/Colab/sample.ipynb"
 
 # --- Competition Settings ---
 IS_COMPETITION_RUNNING = (

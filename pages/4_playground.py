@@ -4,7 +4,8 @@ from st_screen_stats import ScreenData
 
 from config import (
     PLAYGROUND_PAGE_URL_JUPYTERLITE,
-    PLAYGROUND_PAGE_URL_MARIMO
+    PLAYGROUND_PAGE_URL_MARIMO,
+    PLAYGROUND_PAGE_URL_COLAB,
 )
 from utils import page_config, check_password
 
@@ -20,25 +21,41 @@ def playground() -> None:
     screenD = ScreenData(setTimeout=1000)
     data = screenD.st_screen_data()
 
+    calculated_height = int(data["innerHeight"] * 0.9)
+    iframe_height = max(calculated_height, 720)
+
     select_playground = st.segmented_control(
         "select type",
-        ["JupyterLite", "Marimo"],
+        [":material/dynamic_form: JupyterLite", ":material/flowsheet: marimo", ":material/code_blocks: Colab"],
         selection_mode="single",
-        default="JupyterLite"
+        default=":material/dynamic_form: JupyterLite"
     )
 
-    if select_playground == "JupyterLite":
+    if select_playground == ":material/dynamic_form: JupyterLite":
         components.iframe(
             src=PLAYGROUND_PAGE_URL_JUPYTERLITE,
             width=data["innerWidth"],
-            height=int(data["innerHeight"]*0.9),
+            height=iframe_height,
         )
-
-    if select_playground == "Marimo":
+        st.link_button(
+            ":material/dynamic_form: JupyterLite サンプルスクリプトを別タブで開く",
+            url=PLAYGROUND_PAGE_URL_JUPYTERLITE,
+        )
+    elif select_playground == ":material/flowsheet: marimo":
         components.iframe(
             src=PLAYGROUND_PAGE_URL_MARIMO,
             width=data["innerWidth"],
-            height=int(data["innerHeight"]*0.9),
+            height=iframe_height,
+        )
+        st.link_button(
+            ":material/flowsheet: marimo サンプルスクリプトを別タブで開く",
+            url=PLAYGROUND_PAGE_URL_MARIMO,
+        )
+    else:
+        st.write(":material/code_blocks: Colabのサンプルスクリプトはiframeで表示できないため、以下のリンクからColabを開いてください。")
+        st.link_button(
+            ":material/code_blocks: Colab サンプルスクリプトを別タブで開く",
+            url=PLAYGROUND_PAGE_URL_COLAB,
         )
 
 
