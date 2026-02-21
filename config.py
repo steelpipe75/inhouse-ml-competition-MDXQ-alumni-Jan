@@ -10,7 +10,7 @@ PLAYGROUND_PAGE_URL_COLAB = "https://colab.research.google.com/github/steelpipe7
 
 # --- Competition Settings ---
 IS_COMPETITION_RUNNING = (
-    True  # コンペ開催中かどうかのフラグ（True:開催中, False:終了後）
+    False  # コンペ開催中かどうかのフラグ（True:開催中, False:終了後）
 )
 
 # --- Password Protection Settings ---
